@@ -1,33 +1,33 @@
 /* --- CSS VARIABLES --- */
 :root {
-    --primary: #0F2027; /* Dark gradient start */
-    --secondary: #203A43; /* Dark gradient mid */
-    --tertiary: #2C5364; /* Dark gradient end */
-    --accent: #00E1D9; /* Cyan/Teal vibrant accent for tech */
-    --accent-hover: #00B1A9;
-    --text-main: #334155;
-    --text-muted: #64748b;
-    --bg-main: #F8FAFC;
-    --bg-light: #F1F5F9;
-    --bg-card: #FFFFFF;
-    --danger: #ef4444;
-    --success: #22c55e;
-    --warning: #f59e0b;
+    --primary: #1a365d; /* Academic Navy */
+    --secondary: #2a4365; /* Academic Dark Blue */
+    --tertiary: #4299e1; /* Subtle blue accent */
+    --accent: #c6a87c; /* Elegant academic gold */
+    --accent-hover: #b7945d;
+    --text-main: #1a202c; /* Stronger dark grey */
+    --text-muted: #718096; /* Elegant subdued grey */
+    --bg-main: #ffffff; /* Clean white */
+    --bg-light: #f7fafc; /* Very subtle grey */
+    --bg-card: #ffffff;
+    --danger: #e53e3e;
+    --success: #38a169;
+    --warning: #d69e2e;
     
-    --font-heading: 'Outfit', sans-serif;
+    --font-heading: 'Inter', sans-serif; /* Minimalist */
     --font-body: 'Inter', sans-serif;
     
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    --shadow-glass: 0 4px 30px rgba(0, 0, 0, 0.1);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.03);
+    --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.05);
+    --shadow-glass: 0 2px 10px rgba(0, 0, 0, 0.03);
     
-    --radius-sm: 0.25rem;
-    --radius-md: 0.5rem;
-    --radius-lg: 1rem;
-    --radius-xl: 1.5rem;
+    --radius-sm: 0;
+    --radius-md: 2px;
+    --radius-lg: 4px;
+    --radius-xl: 6px;
     
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition: all 0.4s ease-in-out;
 }
 
 /* --- RESET & GLOBAL --- */
