@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conecta Futuro | Administração</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="admin-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="/" style="font-size: 1.5rem; color: #fff; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-graduation-cap" style="color: var(--accent);"></i>
+                    <span>Conecta<strong>Futuro</strong></span>
+                </a>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li class="active" data-tab="tab-dashboard">
+                    <a href="#"><i class="fa-solid fa-chart-line"></i> <span>Dashboard</span></a>
+                </li>
+                <li data-tab="tab-courses">
+                    <a href="#"><i class="fa-solid fa-book"></i> <span>Cursos</span></a>
+                </li>
+                <li data-tab="tab-participants">
+                    <a href="#"><i class="fa-solid fa-users"></i> <span>Participantes</span></a>
+                </li>
+                <li data-tab="tab-enrollments">
+                    <a href="#"><i class="fa-solid fa-file-signature"></i> <span>Inscrições</span></a>
+                </li>
+                <li id="menu-li-users" data-tab="tab-users">
+                    <a href="#"><i class="fa-solid fa-user-shield"></i> <span>Usuários</span></a>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <div class="user-info-sidebar">
+                    <span class="username" id="user-display-name">Carregando...</span>
+                    <span class="role" id="user-display-role">Carregando...</span>
+                </div>
+                <button class="btn-logout" id="btn-logout">
+                    <i class="fa-solid fa-power-off"></i> Sair
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            
+            <div id="tab-dashboard" class="tab-content active">
+                <div class="admin-header">
+                    <h1>Dashboard Conecta Futuro</h1>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="metric-card">
+                        <div class="metric-info">
+                            <h3 id="dash-count-participants">0</h3>
+                            <p>Participantes</p>
+                        </div>
+                        <div class="metric-icon"><i class="fa-solid fa-users"></i></div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-info">
+                            <h3 id="dash-count-courses">0</h3>
+                            <p>Cursos Cadastrados</p>
+                        </div>
+                        <div class="metric-icon"><i class="fa-solid fa-book"></i></div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-info">
+                            <h3 id="dash-count-enrollments">0</h3>
+                            <p>Inscrições Ativas</p>
+                        </div>
+                        <div class="metric-icon"><i class="fa-solid fa-file-circle-check"></i></div>
+                    </div>
+                </div>
+
+                <div class="dashboard-details">
+                    <div class="details-card">
+                        <h2><i class="fa-solid fa-star"></i> Cursos com Maior Procura</h2>
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Título do Curso</th>
+                                        <th>Modalidade</th>
+                                        <th>Total de Vagas</th>
+                                        <th>Alunos Inscritos</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dash-popular-courses-tbody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-courses" class="tab-content">
+                <div class="admin-header">
+                    <h1>Gerenciamento de Cursos</h1>
+                </div>
+
+                <div class="controls-row">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="course-search" placeholder="Pesquisar por título ou descrição...">
+                    </div>
+                    <button class="btn btn-primary" id="btn-add-course">
+                        <i class="fa-solid fa-plus"></i> Cadastrar Novo Curso
+                    </button>
+                </div>
+
+                <div class="details-card">
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Título</th>
+                                    <th>Carga Horária</th>
+                                    <th>Modalidade</th>
+                                    <th>Vagas</th>
+                                    <th>Início</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="courses-tbody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-participants" class="tab-content">
+                <div class="admin-header">
+                    <h1>Gerenciamento de Participantes</h1>
+                </div>
+
+                <div class="controls-row">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="participant-search" placeholder="Pesquisar por nome, CPF ou e-mail...">
+                    </div>
+                    <button class="btn btn-primary" id="btn-add-participant">
+                        <i class="fa-solid fa-plus"></i> Cadastrar Novo Participante
+                    </button>
+                </div>
+
+                <div class="details-card">
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>CPF</th>
+                                    <th>E-mail</th>
+                                    <th>Telefone</th>
+                                    <th>Município</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="participants-tbody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-enrollments" class="tab-content">
+                <div class="admin-header">
+                    <h1>Gerenciamento de Inscrições</h1>
+                </div>
+
+                <div class="controls-row">
+                    <div style="flex-grow: 1;"></div>
+                    <button class="btn btn-primary" id="btn-add-enrollment">
+                        <i class="fa-solid fa-plus"></i> Realizar Nova Inscrição
+                    </button>
+                </div>
+
+                <div class="details-card">
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Participante</th>
+                                    <th>Curso Selecionado</th>
+                                    <th>Data Inscrição</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="enrollments-tbody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-users" class="tab-content">
+                <div class="admin-header">
+                    <h1>Gerenciamento de Usuários do Sistema</h1>
+                </div>
+
+                <div class="controls-row">
+                    <div style="flex-grow: 1;"></div>
+                    <button class="btn btn-primary" id="btn-add-user">
+                        <i class="fa-solid fa-user-plus"></i> Cadastrar Usuário
+                    </button>
+                </div>
+
+                <div class="details-card">
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>E-mail</th>
+                                    <th>Perfil</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-tbody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Modais -->
+    <div class="modal" id="modal-course">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="course-modal-title">Cadastrar Novo Curso</h2>
+                <button class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="course-form">
+                <div class="modal-body">
+                    <input type="hidden" id="course-id">
+                    <div class="form-group">
+                        <label for="course-title">Título do Curso *</label>
+                        <input type="text" id="course-title" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="course-description">Descrição Completa</label>
+                        <textarea id="course-description" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="course-hours">Carga Horária (horas) *</label>
+                            <input type="number" id="course-hours" class="form-control" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="course-modality">Modalidade *</label>
+                            <select id="course-modality" class="form-control" required>
+                                <option value="Presencial">Presencial</option>
+                                <option value="EAD">EAD</option>
+                                <option value="Semipresencial">Semipresencial</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="course-vacancies">Quantidade de Vagas *</label>
+                            <input type="number" id="course-vacancies" class="form-control" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="course-status">Status *</label>
+                            <select id="course-status" class="form-control" required>
+                                <option value="Planejado">Planejado</option>
+                                <option value="Ativo">Ativo</option>
+                                <option value="Concluído">Concluído</option>
+                                <option value="Cancelado">Cancelado</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="course-start-date">Data de Início *</label>
+                            <input type="date" id="course-start-date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="course-end-date">Data de Término *</label>
+                            <input type="date" id="course-end-date" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancel modal-close">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar Curso</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-participant">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="participant-modal-title">Cadastrar Novo Participante</h2>
+                <button class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="participant-form">
+                <div class="modal-body">
+                    <input type="hidden" id="participant-id">
+                    <div class="form-group">
+                        <label for="participant-name">Nome Completo *</label>
+                        <input type="text" id="participant-name" class="form-control" required>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="participant-cpf">CPF (Somente números) *</label>
+                            <input type="text" id="participant-cpf" class="form-control" maxlength="11" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="participant-email">E-mail de Contato *</label>
+                            <input type="email" id="participant-email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="participant-phone">Telefone / WhatsApp *</label>
+                            <input type="text" id="participant-phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="participant-municipality">Município de Residência *</label>
+                            <input type="text" id="participant-municipality" class="form-control" required>
+                        </div>
+                        <div class="form-group form-grid-full">
+                            <label for="participant-education">Grau de Escolaridade *</label>
+                            <select id="participant-education" class="form-control" required>
+                                <option value="Ensino Fundamental Incompleto">Ensino Fundamental Incompleto</option>
+                                <option value="Ensino Fundamental Completo">Ensino Fundamental Completo</option>
+                                <option value="Ensino Médio Incompleto">Ensino Médio Incompleto</option>
+                                <option value="Ensino Médio Completo">Ensino Médio Completo</option>
+                                <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
+                                <option value="Ensino Superior Completo">Ensino Superior Completo</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancel modal-close">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar Participante</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-enrollment">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Realizar Nova Inscrição</h2>
+                <button class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="enrollment-form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="enroll-participant-select">Participante *</label>
+                        <select id="enroll-participant-select" class="form-control" required>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="enroll-course-select">Curso *</label>
+                        <select id="enroll-course-select" class="form-control" required>
+                        </select>
+                    </div>
+                    <div class="alert alert-danger" style="display:block; margin-top:20px; font-size:0.85rem; background-color:#fffbeb; color:#854d0e; border:1px solid #fef3c7;">
+                        <i class="fa-solid fa-circle-info"></i> Inscrições só podem ser feitas em cursos com status "Ativo" e que possuam vagas remanescentes disponíveis.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancel modal-close">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Confirmar Inscrição</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-user">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="user-modal-title">Cadastrar Novo Usuário</h2>
+                <button class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="user-form">
+                <div class="modal-body">
+                    <input type="hidden" id="user-id">
+                    <div class="form-group">
+                        <label for="user-name">Nome Completo *</label>
+                        <input type="text" id="user-name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-email">E-mail *</label>
+                        <input type="email" id="user-email" class="form-control" required autocomplete="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="user-password">Senha de Acesso *</label>
+                        <input type="password" id="user-password" class="form-control" autocomplete="new-password">
+                        <small id="user-password-help" style="color:var(--text-muted); font-size:0.8rem;"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-profile">Perfil de Acesso *</label>
+                        <select id="user-profile" class="form-control" required>
+                            <option value="USUARIO">USUARIO (Padrão/Gestor)</option>
+                            <option value="ADMIN">ADMIN (Administrador Completo)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancel modal-close">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar Usuário</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

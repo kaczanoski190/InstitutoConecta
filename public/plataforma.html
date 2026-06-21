@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conecta Futuro | Plataforma Digital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- ESTILOS EMBUTIDOS DO DESIGN SYSTEM --- */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary: #1a365d;
+            --secondary: #102a43;
+            --accent: #c6a87c;
+            --accent-hover: #b89565;
+            --bg-main: #f0f4f8;
+            --bg-card: #ffffff;
+            --text-main: #102a43;
+            --text-muted: #627d98;
+            --success: #38a169;
+            --danger: #e53e3e;
+            
+            --font-heading: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 8px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 25px rgba(26,54,93,0.1);
+            
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        button {
+            font-family: var(--font-body);
+            cursor: pointer;
+            border: none;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .view-section {
+            display: none;
+        }
+        .view-section.active-view {
+            display: block;
+        }
+
+        .navbar {
+            background-color: var(--bg-card);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            font-family: var(--font-heading);
+            color: var(--primary);
+        }
+
+        .logo i {
+            color: var(--accent);
+        }
+
+        .btn-login {
+            background-color: var(--primary);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+        }
+
+        .btn-login:hover {
+            background-color: var(--accent);
+            color: var(--primary);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            color: #fff;
+            padding: 100px 0 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            color: #fff;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: var(--bg-main);
+        }
+
+        .hero .highlight {
+            color: var(--accent);
+        }
+
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .course-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: 25px;
+            transition: var(--transition);
+            border-top: 5px solid var(--primary);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .course-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .course-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--tertiary);
+            border-top: 1px solid rgba(0,0,0,0.05);
+            padding-top: 15px;
+        }
+
+        .course-meta span i {
+            color: var(--accent);
+            margin-right: 5px;
+        }
+
+        .login-body-bg {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--bg-main) 0%, #dbe3eb 100%);
+            padding: 20px;
+        }
+
+        .login-card {
+            background-color: var(--bg-card);
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            border-top: 6px solid var(--accent);
+        }
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-logo h2 {
+            font-size: 2rem;
+            margin-top: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            border: 1px solid #cbd5e1;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 54, 93, 0.1);
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+            color: #000;
+            padding: 12px;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .btn-accent:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.85rem;
+        }
+
+        .login-footer a {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: var(--radius-md);
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .alert-danger {
+            background-color: #ffeef0;
+            color: var(--danger);
+            border: 1px solid #ffd0d6;
+        }
+
+        .admin-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background-color: var(--secondary);
+            color: #fff;
+            padding: 30px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: fixed;
+            height: 100vh;
+            z-index: 10;
+        }
+
+        .sidebar-header {
+            padding: 0 25px 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .sidebar-menu li a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 25px;
+            color: #cbd5e1;
+            font-weight: 500;
+            font-size: 1rem;
+            border-left: 4px solid transparent;
+        }
+
+        .sidebar-menu li a:hover,
+        .sidebar-menu li.active a {
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-left-color: var(--accent);
+        }
+
+        .sidebar-footer {
+            padding: 20px 25px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem;
+        }
+
+        .user-info-sidebar {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+
+        .user-info-sidebar .username {
+            font-weight: 600;
+        }
+
+        .user-info-sidebar .role {
+            font-size: 0.8rem;
+            color: var(--accent);
+        }
+
+        .btn-logout {
+            background-color: transparent;
+            color: #ef4444;
+            font-weight: 600;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            flex-grow: 1;
+            padding: 40px;
+            background-color: var(--bg-main);
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .admin-header h1 {
+            font-size: 2.2rem;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .metric-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .metric-info h3 {
+            font-size: 2.2rem;
+            line-height: 1.1;
+            margin-bottom: 5px;
+        }
+
+        .metric-info p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .metric-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(198, 168, 124, 0.1);
+            color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .dashboard-details {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .details-card {
+            background-color: var(--bg-card);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: 30px;
+        }
+
+        .details-card h2 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .details-card h2 i {
+            color: var(--accent);
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            width: 100%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--bg-main);
+            color: var(--primary);
+            font-weight: 700;
+            padding: 12px 15px;
+            font-size: 0.9rem;
+            border-bottom: 2px solid rgba(0,0,0,0.05);
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            font-size: 0.95rem;
+        }
+
+        tr:hover td {
+            background-color: rgba(240, 244, 248, 0.5);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge-success { background-color: #d1fae5; color: #065f46; }
+        .badge-warning { background-color: #fef3c7; color: #92400e; }
+        .badge-danger { background-color: #fee2e2; color: #991b1b; }
+        .badge-info { background-color: #e0f2fe; color: #0369a1; }
+
+        .controls-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            display: flex;
+            max-width: 400px;
+            width: 100%;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px 15px 10px 40px;
+            border-radius: var(--radius-md);
+            border: 1px solid #cbd5e1;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary);
+            transform: translateY(-1px);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-action {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+        }
+
+        .btn-edit { background-color: #e0f2fe; color: #0369a1; }
+        .btn-edit:hover { background-color: #bae6fd; }
+
+        .btn-delete { background-color: #fee2e2; color: #991b1b; }
+        .btn-delete:hover { background-color: #fecaca; }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 200;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--bg-card);
+            width: 100%;
+            max-width: 600px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            animation: slideDown 0.3s ease;
+        }
+
+        .modal-header {
+            background-color: var(--primary);
+            color: #fff;
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            color: #fff;
+            font-size: 1.4rem;
+        }
+
+        .modal-close {
+            background-color: transparent;
+            color: #fff;
+            font-size: 1.5rem;
+        }
+
+        .modal-body {
+            padding: 25px;
+            max-height: 75vh;
+            overflow-y: auto;
+        }
+
+        .modal-footer {
+            padding: 15px 25px;
+            background-color: #f8fafc;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-grid-full {
+            grid-column: span 2;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @media (max-width: 992px) {
+            .sidebar { width: 70px; }
+            .sidebar-header h2, .sidebar-menu li a span, .user-info-sidebar, .sidebar-footer p { display: none; }
+            .main-content { margin-left: 70px; }
+        }
+
+        @media (max-width: 768px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .form-grid-full { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================== VISTA 1: HOME PÚBLICA ================== -->
+    <div id="view-home" class="view-section active-view">
+        <nav class="navbar">
+            <div class="container nav-container">
+                <a href="#" class="logo">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>Instituto<strong>ConectaFuturo</strong></span>
+                </a>
+                <div id="login-btn-container">
+                    <button onclick="switchView('view-login')" class="btn-login"><i class="fa-solid fa-right-to-bracket"></i> Acessar Painel</button>
+                </div>
+            </div>
+        </nav>
+
+        <header class="hero">
+            <div class="container">
+                <h1>Transformação Social pela <span class="highlight">Educação e Tecnologia</span></h1>
+                <p>O Conecta Futuro oferece capacitação técnica, inclusão produtiva e cursos especializados para a inserção de talentos no mercado de trabalho.</p>
+            </div>
+        </header>
+
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Cursos Disponíveis (Protótipo Offline)</h2>
+                <div class="courses-grid" id="home-courses-grid">
+                </div>
+            </div>
+        </section>
+
+        <footer style="background-color: var(--secondary); color: #fff; padding: 40px 0; text-align: center; border-top: 5px solid var(--accent);">
+            <div class="container">
+                <p>Instituto<strong>ConectaFuturo</strong> &copy; 2026. Protótipo Interativo 100% Funcional no Browser.</p>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- ================== VISTA 2: LOGIN ================== -->
+    <div id="view-login" class="view-section">
+        <div class="login-body-bg">
+            <div class="login-card">
+                <div class="login-logo">
+                    <a href="#" onclick="switchView('view-home')" style="font-size: 2.2rem; color: var(--primary); font-weight: 800; font-family: var(--font-heading);">
+                        <i class="fa-solid fa-graduation-cap" style="color: var(--accent);"></i>
+                        <span>Conecta<strong>Futuro</strong></span>
+                    </a>
+                    <p style="color: var(--text-muted); margin-top: 5px;">Acesso ao Painel Demonstrativo</p>
+                </div>
+
+                <div id="login-alert" class="alert alert-danger"></div>
+
+                <form id="demo-login-form">
+                    <div class="form-group">
+                        <label for="login-email"><i class="fa-solid fa-envelope"></i> E-mail Corporativo</label>
+                        <input type="email" id="login-email" class="form-control" placeholder="admin@conectafuturo.org" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login-password"><i class="fa-solid fa-lock"></i> Senha</label>
+                        <input type="password" id="login-password" class="form-control" placeholder="admin123" required>
+                        <small style="color: var(--text-muted); margin-top: 5px; display:block;">Use <strong>admin@conectafuturo.org</strong> e senha <strong>admin123</strong></small>
+                    </div>
+
+                    <button type="submit" class="btn btn-accent btn-block">
+                        <i class="fa-solid fa-right-to-bracket"></i> Entrar
+                    </button>
+                </form>
+
+                <div class="login-footer">
+                    <a href="#" onclick="switchView('view-home')"><i class="fa-solid fa-arrow-left"></i> Voltar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================== VISTA 3: ADMINISTRAÇÃO SPA ================== -->
+    <div id="view-admin" class="view-section">
+        <div class="admin-wrapper">
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <a href="#" onclick="switchView('view-home')" style="font-size: 1.5rem; color: #fff; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-graduation-cap" style="color: var(--accent);"></i>
+                        <span>Conecta<strong>Futuro</strong></span>
+                    </a>
+                </div>
+
+                <ul class="sidebar-menu">
+                    <li class="active" data-tab="tab-dashboard" onclick="switchAdminTab('tab-dashboard')">
+                        <a href="#"><i class="fa-solid fa-chart-line"></i> <span>Dashboard</span></a>
+                    </li>
+                    <li data-tab="tab-courses" onclick="switchAdminTab('tab-courses')">
+                        <a href="#"><i class="fa-solid fa-book"></i> <span>Cursos</span></a>
+                    </li>
+                    <li data-tab="tab-participants" onclick="switchAdminTab('tab-participants')">
+                        <a href="#"><i class="fa-solid fa-users"></i> <span>Participantes</span></a>
+                    </li>
+                    <li data-tab="tab-enrollments" onclick="switchAdminTab('tab-enrollments')">
+                        <a href="#"><i class="fa-solid fa-file-signature"></i> <span>Inscrições</span></a>
+                    </li>
+                    <li id="menu-li-users" data-tab="tab-users" onclick="switchAdminTab('tab-users')">
+                        <a href="#"><i class="fa-solid fa-user-shield"></i> <span>Usuários</span></a>
+                    </li>
+                </ul>
+
+                <div class="sidebar-footer">
+                    <div class="user-info-sidebar">
+                        <span class="username" id="user-display-name">Administrador</span>
+                        <span class="role" id="user-display-role">ADMIN</span>
+                    </div>
+                    <button class="btn-logout" onclick="demoLogout()">
+                        <i class="fa-solid fa-power-off"></i> Sair
+                    </button>
+                </div>
+            </aside>
+
+            <main class="main-content">
+                
+                <div id="tab-dashboard" class="tab-content active">
+                    <div class="admin-header">
+                        <h1>Painel Geral de Métricas</h1>
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="metric-card">
+                            <div class="metric-info">
+                                <h3 id="dash-count-participants">0</h3>
+                                <p>Participantes</p>
+                            </div>
+                            <div class="metric-icon"><i class="fa-solid fa-users"></i></div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-info">
+                                <h3 id="dash-count-courses">0</h3>
+                                <p>Cursos</p>
+                            </div>
+                            <div class="metric-icon"><i class="fa-solid fa-book"></i></div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-info">
+                                <h3 id="dash-count-enrollments">0</h3>
+                                <p>Inscrições Ativas</p>
+                            </div>
+                            <div class="metric-icon"><i class="fa-solid fa-file-circle-check"></i></div>
+                        </div>
+                    </div>
+                    <div class="dashboard-details">
+                        <div class="details-card">
+                            <h2><i class="fa-solid fa-star"></i> Cursos com Maior Procura</h2>
+                            <div class="table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Título do Curso</th>
+                                            <th>Modalidade</th>
+                                            <th>Vagas Ofertadas</th>
+                                            <th>Inscritos Ativos</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="dash-popular-courses-tbody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-courses" class="tab-content">
+                    <div class="admin-header">
+                        <h1>Cursos Ofertados</h1>
+                    </div>
+                    <div class="controls-row">
+                        <div class="search-box">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="course-search" placeholder="Pesquisar por título..." oninput="renderCoursesTable(this.value)">
+                        </div>
+                        <button class="btn btn-primary" onclick="openCourseModal()"><i class="fa-solid fa-plus"></i> Cadastrar Curso</button>
+                    </div>
+                    <div class="details-card">
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Título</th>
+                                        <th>Carga Horária</th>
+                                        <th>Modalidade</th>
+                                        <th>Vagas</th>
+                                        <th>Início</th>
+                                        <th>Status</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="courses-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-participants" class="tab-content">
+                    <div class="admin-header">
+                        <h1>Participantes Cadastrados</h1>
+                    </div>
+                    <div class="controls-row">
+                        <div class="search-box">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="participant-search" placeholder="Pesquisar por nome ou CPF..." oninput="renderParticipantsTable(this.value)">
+                        </div>
+                        <button class="btn btn-primary" onclick="openParticipantModal()"><i class="fa-solid fa-plus"></i> Cadastrar Participante</button>
+                    </div>
+                    <div class="details-card">
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nome</th>
+                                        <th>CPF</th>
+                                        <th>E-mail</th>
+                                        <th>Telefone</th>
+                                        <th>Município</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="participants-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-enrollments" class="tab-content">
+                    <div class="admin-header">
+                        <h1>Inscrições Efetuadas</h1>
+                    </div>
+                    <div class="controls-row">
+                        <div style="flex-grow: 1;"></div>
+                        <button class="btn btn-primary" onclick="openEnrollmentModal()"><i class="fa-solid fa-plus"></i> Realizar Inscrição</button>
+                    </div>
+                    <div class="details-card">
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Participante</th>
+                                        <th>Curso</th>
+                                        <th>Data Inscrição</th>
+                                        <th>Status</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="enrollments-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-users" class="tab-content">
+                    <div class="admin-header">
+                        <h1>Usuários do Sistema</h1>
+                    </div>
+                    <div class="controls-row">
+                        <div style="flex-grow: 1;"></div>
+                        <button class="btn btn-primary" onclick="openUserModal()"><i class="fa-solid fa-plus"></i> Novo Usuário</button>
+                    </div>
+                    <div class="details-card">
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nome</th>
+                                        <th>E-mail</th>
+                                        <th>Perfil</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="users-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+
+    <!-- Modais -->
+    <div class="modal" id="modal-course">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="course-modal-title">Novo Curso</h2>
+                <button class="modal-close" onclick="closeModal('modal-course')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="form-course" onsubmit="saveCourse(event)">
+                <div class="modal-body">
+                    <input type="hidden" id="course-id">
+                    <div class="form-group">
+                        <label>Título do Curso *</label>
+                        <input type="text" id="course-title" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Descrição</label>
+                        <textarea id="course-description" class="form-control" rows="2"></textarea>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Carga Horária (h) *</label>
+                            <input type="number" id="course-hours" class="form-control" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Modalidade *</label>
+                            <select id="course-modality" class="form-control" required>
+                                <option value="Presencial">Presencial</option>
+                                <option value="EAD">EAD</option>
+                                <option value="Semipresencial">Semipresencial</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Vagas *</label>
+                            <input type="number" id="course-vacancies" class="form-control" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Status *</label>
+                            <select id="course-status" class="form-control" required>
+                                <option value="Planejado">Planejado</option>
+                                <option value="Ativo">Ativo</option>
+                                <option value="Concluído">Concluído</option>
+                                <option value="Cancelado">Cancelado</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Início *</label>
+                            <input type="date" id="course-start-date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Término *</label>
+                            <input type="date" id="course-end-date" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancel" onclick="closeModal('modal-course')">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-participant">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="participant-modal-title">Novo Participante</h2>
+                <button class="modal-close" onclick="closeModal('modal-participant')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="form-participant" onsubmit="saveParticipant(event)">
+                <div class="modal-body">
+                    <input type="hidden" id="participant-id">
+                    <div class="form-group">
+                        <label>Nome Completo *</label>
+                        <input type="text" id="form-participant-name" class="form-control" required>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>CPF (Apenas 11 números) *</label>
+                            <input type="text" id="form-participant-cpf" class="form-control" maxlength="11" required>
+                        </div>
+                        <div class="form-group">
+                            <label>E-mail *</label>
+                            <input type="email" id="form-participant-email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Telefone *</label>
+                            <input type="text" id="form-participant-phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Município *</label>
+                            <input type="text" id="form-participant-municipality" class="form-control" required>
+                        </div>
+                        <div class="form-group form-grid-full">
+                            <label>Escolaridade *</label>
+                            <select id="form-participant-education" class="form-control" required>
+                                <option value="Ensino Médio Incompleto">Ensino Médio Incompleto</option>
+                                <option value="Ensino Médio Completo">Ensino Médio Completo</option>
+                                <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
+                                <option value="Ensino Superior Completo">Ensino Superior Completo</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancel" onclick="closeModal('modal-participant')">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-enrollment">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Realizar Nova Inscrição</h2>
+                <button class="modal-close" onclick="closeModal('modal-enrollment')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="form-enrollment" onsubmit="saveEnrollment(event)">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Selecionar Participante *</label>
+                        <select id="enroll-participant-select" class="form-control" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Selecionar Curso Ativo *</label>
+                        <select id="enroll-course-select" class="form-control" required></select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancel" onclick="closeModal('modal-enrollment')">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Inscrever Aluno</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-user">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="user-modal-title">Novo Usuário</h2>
+                <button class="modal-close" onclick="closeModal('modal-user')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form id="form-user" onsubmit="saveUser(event)">
+                <div class="modal-body">
+                    <input type="hidden" id="user-id">
+                    <div class="form-group">
+                        <label>Nome Completo *</label>
+                        <input type="text" id="user-name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail *</label>
+                        <input type="email" id="user-email" class="form-control" required autocomplete="username">
+                    </div>
+                    <div class="form-group">
+                        <label>Senha *</label>
+                        <input type="password" id="user-password" class="form-control" placeholder="••••••••" autocomplete="new-password">
+                        <small id="user-pw-help" style="color:var(--text-muted);display:block;margin-top:4px;"></small>
+                    </div>
+                    <div class="form-group">
+                        <label>Perfil *</label>
+                        <select id="user-profile" class="form-control" required>
+                            <option value="USUARIO">USUARIO</option>
+                            <option value="ADMIN">ADMIN</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancel" onclick="closeModal('modal-user')">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        const DEFAULT_USERS = [
+            { id: 1, nome: "Administrador Conecta", email: "admin@conectafuturo.org", senha: "admin123", perfil: "ADMIN", data_cadastro: new Date() },
+            { id: 2, nome: "Aline Souza", email: "aline@conectafuturo.org", senha: "user123", perfil: "USUARIO", data_cadastro: new Date() }
+        ];
+
+        const DEFAULT_COURSES = [
+            { id: 1, titulo: "Desenvolvimento Web Full Stack", descricao: "Aprenda HTML, CSS, JavaScript, Node.js e bancos de dados SQL/NoSQL.", carga_horaria: 120, modalidade: "EAD", vagas: 30, data_inicio: "2026-07-01", data_fim: "2026-10-15", status: "Ativo" },
+            { id: 2, titulo: "Redes e Infraestrutura de TI", descricao: "Protocolos WAN/LAN, Cisco IOS, Active Directory e GPO.", carga_horaria: 80, modalidade: "Presencial", vagas: 20, data_inicio: "2026-08-01", data_fim: "2026-09-30", status: "Ativo" },
+            { id: 3, titulo: "Informática Básica e Office", descricao: "Curso essencial focado na reinserção de jovens e adultos no mercado.", carga_horaria: 40, modalidade: "Presencial", vagas: 25, data_inicio: "2026-07-15", data_fim: "2026-08-15", status: "Planejado" }
+        ];
+
+        const DEFAULT_PARTICIPANTS = [
+            { id: 1, nome: "Gabriel Barbosa", cpf: "11122233344", email: "gabriel@email.com", telefone: "11999998888", municipio: "Guarulhos", escolaridade: "Ensino Médio Completo" },
+            { id: 2, nome: "Camila Fernandes", cpf: "22233344455", email: "camila@email.com", telefone: "11988887777", municipio: "São Paulo", escolaridade: "Ensino Superior Incompleto" }
+        ];
+
+        const DEFAULT_ENROLLMENTS = [
+            { id: 1, participante_id: 1, curso_id: 1, data_inscricao: new Date(), status: "Ativo" },
+            { id: 2, participante_id: 2, curso_id: 1, data_inscricao: new Date(), status: "Ativo" },
+            { id: 3, participante_id: 2, curso_id: 2, data_inscricao: new Date(), status: "Ativo" }
+        ];
+
+        function getMockDB() {
+            if (!localStorage.getItem('mock_initialized')) {
+                localStorage.setItem('users', JSON.stringify(DEFAULT_USERS));
+                localStorage.setItem('courses', JSON.stringify(DEFAULT_COURSES));
+                localStorage.setItem('participants', JSON.stringify(DEFAULT_PARTICIPANTS));
+                localStorage.setItem('enrollments', JSON.stringify(DEFAULT_ENROLLMENTS));
+                localStorage.setItem('mock_initialized', 'true');
+            }
+            return {
+                users: JSON.parse(localStorage.getItem('users')),
+                courses: JSON.parse(localStorage.getItem('courses')),
+                participants: JSON.parse(localStorage.getItem('participants')),
+                enrollments: JSON.parse(localStorage.getItem('enrollments'))
+            };
+        }
+
+        function saveMockDB(data) {
+            localStorage.setItem('users', JSON.stringify(data.users));
+            localStorage.setItem('courses', JSON.stringify(data.courses));
+            localStorage.setItem('participants', JSON.stringify(data.participants));
+            localStorage.setItem('enrollments', JSON.stringify(data.enrollments));
+        }
+
+        let currentActiveUser = null;
+
+        function switchView(viewId) {
+            document.querySelectorAll('.view-section').forEach(view => {
+                view.classList.remove('active-view');
+            });
+            document.getElementById(viewId).classList.add('active-view');
+
+            if (viewId === 'view-home') {
+                renderHomeCourses();
+            }
+        }
+
+        document.getElementById('demo-login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+            const alertDiv = document.getElementById('login-alert');
+
+            alertDiv.style.display = 'none';
+
+            const db = getMockDB();
+            const user = db.users.find(u => u.email === email && u.senha === password);
+
+            if (!user) {
+                alertDiv.textContent = "E-mail ou senha incorretos.";
+                alertDiv.style.display = 'block';
+                return;
+            }
+
+            currentActiveUser = user;
+            document.getElementById('user-display-name').textContent = user.nome;
+            document.getElementById('user-display-role').textContent = user.perfil;
+            
+            const usersMenuOption = document.getElementById('menu-li-users');
+            if (user.perfil !== 'ADMIN') {
+                usersMenuOption.style.display = 'none';
+            } else {
+                usersMenuOption.style.display = 'block';
+            }
+
+            switchView('view-admin');
+            switchAdminTab('tab-dashboard');
+        });
+
+        function demoLogout() {
+            currentActiveUser = null;
+            switchView('view-home');
+        }
+
+        function switchAdminTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.sidebar-menu li').forEach(li => {
+                li.classList.remove('active');
+            });
+
+            document.getElementById(tabId).classList.add('active');
+            const activeLi = document.querySelector(`.sidebar-menu li[data-tab="${tabId}"]`);
+            if (activeLi) activeLi.classList.add('active');
+
+            if (tabId === 'tab-dashboard') loadDashboardData();
+            if (tabId === 'tab-courses') renderCoursesTable();
+            if (tabId === 'tab-participants') renderParticipantsTable();
+            if (tabId === 'tab-enrollments') renderEnrollmentsTable();
+            if (tabId === 'tab-users') renderUsersTable();
+        }
+
+        function renderHomeCourses() {
+            const grid = document.getElementById('home-courses-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            
+            const db = getMockDB();
+            const activeCourses = db.courses.filter(c => c.status === 'Ativo');
+
+            if (activeCourses.length === 0) {
+                grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--text-muted);">Nenhum curso ativo no momento.</p>';
+                return;
+            }
+
+            activeCourses.forEach(c => {
+                grid.innerHTML += `
+                    <div class="course-card">
+                        <div>
+                            <h3>${escapeHTML(c.titulo)}</h3>
+                            <p>${escapeHTML(c.descricao || 'Sem descrição cadastrada.')}</p>
+                        </div>
+                        <div class="course-meta">
+                            <span><i class="fa-solid fa-clock"></i> ${c.carga_horaria}h</span>
+                            <span><i class="fa-solid fa-location-dot"></i> ${escapeHTML(c.modalidade)}</span>
+                            <span><i class="fa-solid fa-users"></i> ${c.vagas} vagas</span>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function loadDashboardData() {
+            const db = getMockDB();
+            
+            document.getElementById('dash-count-participants').textContent = db.participants.length;
+            document.getElementById('dash-count-courses').textContent = db.courses.length;
+            
+            const activeEnrollments = db.enrollments.filter(e => e.status === 'Ativo').length;
+            document.getElementById('dash-count-enrollments').textContent = activeEnrollments;
+
+            const popularBody = document.getElementById('dash-popular-courses-tbody');
+            popularBody.innerHTML = '';
+
+            const coursesWithCounts = db.courses.map(c => {
+                const count = db.enrollments.filter(e => e.curso_id === c.id && e.status === 'Ativo').length;
+                return { ...c, total_inscritos: count };
+            });
+
+            coursesWithCounts.sort((a, b) => b.total_inscritos - a.total_inscritos);
+            
+            coursesWithCounts.slice(0, 5).forEach(c => {
+                popularBody.innerHTML += `
+                    <tr>
+                        <td><strong>${escapeHTML(c.titulo)}</strong></td>
+                        <td>${escapeHTML(c.modalidade)}</td>
+                        <td>${c.vagas}</td>
+                        <td><span class="badge badge-success">${c.total_inscritos} alunos</span></td>
+                    </tr>
+                `;
+            });
+        }
+
+        function openCourseModal(id = null) {
+            const modal = document.getElementById('modal-course');
+            const form = document.getElementById('form-course');
+            form.reset();
+            document.getElementById('course-id').value = '';
+            document.getElementById('course-modal-title').textContent = 'Cadastrar Novo Curso';
+
+            if (id) {
+                const db = getMockDB();
+                const course = db.courses.find(c => c.id === id);
+                if (course) {
+                    document.getElementById('course-modal-title').textContent = 'Editar Curso';
+                    document.getElementById('course-id').value = course.id;
+                    document.getElementById('course-title').value = course.titulo;
+                    document.getElementById('course-description').value = course.descricao || '';
+                    document.getElementById('course-hours').value = course.carga_horaria;
+                    document.getElementById('course-modality').value = course.modalidade;
+                    document.getElementById('course-vacancies').value = course.vagas;
+                    document.getElementById('course-status').value = course.status;
+                    document.getElementById('course-start-date').value = course.data_inicio;
+                    document.getElementById('course-end-date').value = course.data_fim;
+                }
+            }
+            modal.classList.add('active');
+        }
+
+        function saveCourse(e) {
+            e.preventDefault();
+            const id = document.getElementById('course-id').value;
+            const titulo = document.getElementById('course-title').value.trim();
+            const descricao = document.getElementById('course-description').value.trim();
+            const carga_horaria = parseInt(document.getElementById('course-hours').value);
+            const modalidade = document.getElementById('course-modality').value;
+            const vagas = parseInt(document.getElementById('course-vacancies').value);
+            const status = document.getElementById('course-status').value;
+            const data_inicio = document.getElementById('course-start-date').value;
+            const data_fim = document.getElementById('course-end-date').value;
+
+            if (new Date(data_inicio) > new Date(data_fim)) {
+                alert('Data de início não pode ser maior que a data de término.');
+                return;
+            }
+
+            const db = getMockDB();
+
+            if (id) {
+                const index = db.courses.findIndex(c => c.id === parseInt(id));
+                if (index !== -1) {
+                    db.courses[index] = { id: parseInt(id), titulo, descricao, carga_horaria, modalidade, vagas, status, data_inicio, data_fim };
+                }
+            } else {
+                const nextId = db.courses.length > 0 ? Math.max(...db.courses.map(c => c.id)) + 1 : 1;
+                db.courses.push({ id: nextId, titulo, descricao, carga_horaria, modalidade, vagas, status, data_inicio, data_fim });
+            }
+
+            saveMockDB(db);
+            closeModal('modal-course');
+            renderCoursesTable();
+        }
+
+        function renderCoursesTable(search = '') {
+            const tbody = document.getElementById('courses-tbody');
+            tbody.innerHTML = '';
+            const db = getMockDB();
+
+            const filtered = db.courses.filter(c => c.titulo.toLowerCase().includes(search.toLowerCase()));
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;">Nenhum curso cadastrado.</td></tr>';
+                return;
+            }
+
+            filtered.forEach(c => {
+                let badge = 'badge-success';
+                if (c.status === 'Planejado') badge = 'badge-info';
+                if (c.status === 'Cancelado') badge = 'badge-danger';
+                
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${c.id}</td>
+                        <td><strong>${escapeHTML(c.titulo)}</strong></td>
+                        <td>${c.carga_horaria}h</td>
+                        <td>${escapeHTML(c.modalidade)}</td>
+                        <td>${c.vagas}</td>
+                        <td>${formatDateBR(c.data_inicio)}</td>
+                        <td><span class="badge ${badge}">${c.status}</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-action btn-edit" onclick="openCourseModal(${c.id})"><i class="fa-solid fa-pen"></i></button>
+                                <button class="btn-action btn-delete" onclick="deleteCourse(${c.id})"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function deleteCourse(id) {
+            if (confirm('Deseja realmente deletar este curso? Todas as inscrições relacionadas serão removidas.')) {
+                const db = getMockDB();
+                db.courses = db.courses.filter(c => c.id !== id);
+                db.enrollments = db.enrollments.filter(e => e.curso_id !== id);
+                saveMockDB(db);
+                renderCoursesTable();
+            }
+        }
+
+        function openParticipantModal(id = null) {
+            const modal = document.getElementById('modal-participant');
+            const form = document.getElementById('form-participant');
+            form.reset();
+            document.getElementById('participant-id').value = '';
+            document.getElementById('participant-modal-title').textContent = 'Cadastrar Novo Participante';
+
+            if (id) {
+                const db = getMockDB();
+                const part = db.participants.find(p => p.id === id);
+                if (part) {
+                    document.getElementById('participant-modal-title').textContent = 'Editar Participante';
+                    document.getElementById('participant-id').value = part.id;
+                    document.getElementById('form-participant-name').value = part.nome;
+                    document.getElementById('form-participant-cpf').value = part.cpf;
+                    document.getElementById('form-participant-email').value = part.email;
+                    document.getElementById('form-participant-phone').value = part.telefone;
+                    document.getElementById('form-participant-municipality').value = part.municipio;
+                    document.getElementById('form-participant-education').value = part.escolaridade;
+                }
+            }
+            modal.classList.add('active');
+        }
+
+        function saveParticipant(e) {
+            e.preventDefault();
+            const id = document.getElementById('participant-id').value;
+            const nome = document.getElementById('form-participant-name').value.trim();
+            const cpf = document.getElementById('form-participant-cpf').value.replace(/\D/g, '');
+            const email = document.getElementById('form-participant-email').value.trim();
+            const telefone = document.getElementById('form-participant-phone').value.trim();
+            const municipio = document.getElementById('form-participant-municipality').value.trim();
+            const escolaridade = document.getElementById('form-participant-education').value;
+
+            if (cpf.length !== 11) {
+                alert('CPF deve possuir exatamente 11 dígitos.');
+                return;
+            }
+
+            const db = getMockDB();
+
+            const cpfExists = db.participants.some(p => p.cpf === cpf && p.id !== parseInt(id));
+            if (cpfExists) {
+                alert('Já existe um participante cadastrado com este CPF.');
+                return;
+            }
+
+            if (id) {
+                const idx = db.participants.findIndex(p => p.id === parseInt(id));
+                if (idx !== -1) {
+                    db.participants[idx] = { id: parseInt(id), nome, cpf, email, telefone, municipio, escolaridade };
+                }
+            } else {
+                const nextId = db.participants.length > 0 ? Math.max(...db.participants.map(p => p.id)) + 1 : 1;
+                db.participants.push({ id: nextId, nome, cpf, email, telefone, municipio, escolaridade });
+            }
+
+            saveMockDB(db);
+            closeModal('modal-participant');
+            renderParticipantsTable();
+        }
+
+        function renderParticipantsTable(search = '') {
+            const tbody = document.getElementById('participants-tbody');
+            tbody.innerHTML = '';
+            const db = getMockDB();
+
+            const filtered = db.participants.filter(p => p.nome.toLowerCase().includes(search.toLowerCase()) || p.cpf.includes(search));
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">Nenhum participante encontrado.</td></tr>';
+                return;
+            }
+
+            filtered.forEach(p => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${p.id}</td>
+                        <td><strong>${escapeHTML(p.nome)}</strong></td>
+                        <td>${formatCPF(p.cpf)}</td>
+                        <td>${escapeHTML(p.email)}</td>
+                        <td>${escapeHTML(p.telefone)}</td>
+                        <td>${escapeHTML(p.municipio)}</td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-action btn-edit" onclick="openParticipantModal(${p.id})"><i class="fa-solid fa-pen"></i></button>
+                                <button class="btn-action btn-delete" onclick="deleteParticipant(${p.id})"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function deleteParticipant(id) {
+            if (confirm('Deseja realmente excluir este participante? Todas as suas inscrições serão removidas.')) {
+                const db = getMockDB();
+                db.participants = db.participants.filter(p => p.id !== id);
+                db.enrollments = db.enrollments.filter(e => e.participante_id !== id);
+                saveMockDB(db);
+                renderParticipantsTable();
+            }
+        }
+
+        function openEnrollmentModal() {
+            const modal = document.getElementById('modal-enrollment');
+            const partSelect = document.getElementById('enroll-participant-select');
+            const courseSelect = document.getElementById('enroll-course-select');
+            
+            partSelect.innerHTML = '<option value="">-- Selecione o Aluno --</option>';
+            courseSelect.innerHTML = '<option value="">-- Selecione o Curso --</option>';
+
+            const db = getMockDB();
+
+            db.participants.forEach(p => {
+                partSelect.innerHTML += `<option value="${p.id}">${escapeHTML(p.nome)} (CPF: ${formatCPF(p.cpf)})</option>`;
+            });
+
+            db.courses.filter(c => c.status === 'Ativo').forEach(c => {
+                const activeCount = db.enrollments.filter(e => e.curso_id === c.id && e.status === 'Ativo').length;
+                const vagasDisponiveis = c.vagas - activeCount;
+                courseSelect.innerHTML += `<option value="${c.id}">${escapeHTML(c.titulo)} (Vagas restantes: ${vagasDisponiveis})</option>`;
+            });
+
+            modal.classList.add('active');
+        }
+
+        function saveEnrollment(e) {
+            e.preventDefault();
+            const partId = parseInt(document.getElementById('enroll-participant-select').value);
+            const courseId = parseInt(document.getElementById('enroll-course-select').value);
+
+            const db = getMockDB();
+
+            const course = db.courses.find(c => c.id === courseId);
+            
+            const alreadyEnrolled = db.enrollments.some(e => e.participante_id === partId && e.curso_id === courseId && e.status === 'Ativo');
+            if (alreadyEnrolled) {
+                alert('Este participante já possui uma inscrição activa neste curso.');
+                return;
+            }
+
+            const activeCount = db.enrollments.filter(e => e.curso_id === courseId && e.status === 'Ativo').length;
+            if (activeCount >= course.vagas) {
+                alert('Não há mais vagas disponíveis para este curso.');
+                return;
+            }
+
+            const nextId = db.enrollments.length > 0 ? Math.max(...db.enrollments.map(e => e.id)) + 1 : 1;
+            db.enrollments.push({
+                id: nextId,
+                participante_id: partId,
+                curso_id: courseId,
+                data_inscricao: new Date(),
+                status: 'Ativo'
+            });
+
+            saveMockDB(db);
+            closeModal('modal-enrollment');
+            renderEnrollmentsTable();
+        }
+
+        function renderEnrollmentsTable() {
+            const tbody = document.getElementById('enrollments-tbody');
+            tbody.innerHTML = '';
+            const db = getMockDB();
+
+            if (db.enrollments.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">Nenhuma inscrição cadastrada.</td></tr>';
+                return;
+            }
+
+            db.enrollments.forEach(e => {
+                const part = db.participants.find(p => p.id === e.participante_id);
+                const course = db.courses.find(c => c.id === e.curso_id);
+
+                if (!part || !course) return;
+
+                const isAtivo = e.status === 'Ativo';
+                const action = isAtivo 
+                    ? `<button class="btn-action btn-delete" onclick="cancelEnrollment(${e.id})" title="Cancelar Inscrição"><i class="fa-solid fa-ban"></i></button>`
+                    : '<span style="font-size:0.85rem;color:var(--text-muted);">Cancelada</span>';
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${e.id}</td>
+                        <td><strong>${escapeHTML(part.nome)}</strong><br><small>${escapeHTML(part.email)}</small></td>
+                        <td><strong>${escapeHTML(course.titulo)}</strong></td>
+                        <td>${formatDateBR(e.data_inscricao)}</td>
+                        <td><span class="badge ${isAtivo ? 'badge-success' : 'badge-danger'}">${e.status}</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                ${action}
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function cancelEnrollment(id) {
+            if (confirm('Deseja realmente CANCELAR esta inscrição? Uma vaga será liberada no curso.')) {
+                const db = getMockDB();
+                const index = db.enrollments.findIndex(e => e.id === id);
+                if (index !== -1) {
+                    db.enrollments[index].status = 'Cancelado';
+                    saveMockDB(db);
+                    renderEnrollmentsTable();
+                }
+            }
+        }
+
+        function openUserModal(id = null) {
+            const modal = document.getElementById('modal-user');
+            const form = document.getElementById('form-user');
+            form.reset();
+            document.getElementById('user-id').value = '';
+            document.getElementById('user-modal-title').textContent = 'Novo Usuário do Sistema';
+            document.getElementById('user-password').required = true;
+            document.getElementById('user-pw-help').textContent = '';
+
+            if (id) {
+                const db = getMockDB();
+                const u = db.users.find(user => user.id === id);
+                if (u) {
+                    document.getElementById('user-modal-title').textContent = 'Editar Usuário';
+                    document.getElementById('user-id').value = u.id;
+                    document.getElementById('user-name').value = u.nome;
+                    document.getElementById('user-email').value = u.email;
+                    document.getElementById('user-profile').value = u.perfil;
+                    document.getElementById('user-password').required = false;
+                    document.getElementById('user-pw-help').textContent = 'Deixe em branco para manter a senha atual.';
+                }
+            }
+            modal.classList.add('active');
+        }
+
+        function saveUser(e) {
+            e.preventDefault();
+            const id = document.getElementById('user-id').value;
+            const nome = document.getElementById('user-name').value.trim();
+            const email = document.getElementById('user-email').value.trim();
+            const senha = document.getElementById('user-password').value;
+            const perfil = document.getElementById('user-profile').value;
+
+            const db = getMockDB();
+
+            const emailExists = db.users.some(u => u.email === email && u.id !== parseInt(id));
+            if (emailExists) {
+                alert('Este e-mail de usuário já está cadastrado.');
+                return;
+            }
+
+            if (id) {
+                const idx = db.users.findIndex(u => u.id === parseInt(id));
+                if (idx !== -1) {
+                    const existingPassword = db.users[idx].senha;
+                    db.users[idx] = { 
+                        id: parseInt(id), 
+                        nome, 
+                        email, 
+                        senha: senha ? senha : existingPassword, 
+                        perfil,
+                        data_cadastro: db.users[idx].data_cadastro 
+                    };
+                }
+            } else {
+                if (!senha) {
+                    alert('Defina uma senha de acesso.');
+                    return;
+                }
+                const nextId = db.users.length > 0 ? Math.max(...db.users.map(u => u.id)) + 1 : 1;
+                db.users.push({ id: nextId, nome, email, senha, perfil, data_cadastro: new Date() });
+            }
+
+            saveMockDB(db);
+            closeModal('modal-user');
+            renderUsersTable();
+        }
+
+        function renderUsersTable() {
+            const tbody = document.getElementById('users-tbody');
+            tbody.innerHTML = '';
+            const db = getMockDB();
+
+            db.users.forEach(u => {
+                const badge = u.perfil === 'ADMIN' ? 'badge-info' : 'badge-success';
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${u.id}</td>
+                        <td><strong>${escapeHTML(u.nome)}</strong></td>
+                        <td>${escapeHTML(u.email)}</td>
+                        <td><span class="badge ${badge}">${u.perfil}</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-action btn-edit" onclick="openUserModal(${u.id})"><i class="fa-solid fa-pen"></i></button>
+                                <button class="btn-action btn-delete" onclick="deleteUser(${u.id})"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function deleteUser(id) {
+            if (confirm('Deseja realmente remover este usuário do sistema?')) {
+                const db = getMockDB();
+                db.users = db.users.filter(u => u.id !== id);
+                saveMockDB(db);
+                renderUsersTable();
+            }
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        function escapeHTML(str) {
+            if (!str) return '';
+            return str.replace(/[&<>'"]/g, 
+                tag => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    "'": '&#39;',
+                    '"': '&quot;'
+                }[tag] || tag)
+            );
+        }
+
+        function formatDateBR(dateStr) {
+            if (!dateStr) return '-';
+            const date = new Date(dateStr);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}/${month}/${year}`;
+        }
+
+        function formatCPF(cpf) {
+            if (!cpf) return '-';
+            const clean = cpf.replace(/\D/g, '');
+            if (clean.length !== 11) return cpf;
+            return `${clean.slice(0, 3)}.${clean.slice(3, 6)}.${clean.slice(6, 9)}-${clean.slice(9)}`;
+        }
+
+        window.onload = () => {
+            renderHomeCourses();
+            if (window.location.hash === '#login') {
+                switchView('view-login');
+            }
+        }
+    </script>
+</body>
+</html>

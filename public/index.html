@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instituto Conecta Futuro | Home</title>
+    <meta name="description" content="Sistema de gestão de cursos, inscrições e capacitações do programa Conecta Futuro.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <span>Instituto<strong>ConectaFuturo</strong></span>
+            </a>
+            <div id="login-btn-container">
+                <a href="plataforma.html#login" class="btn-login"><i class="fa-solid fa-right-to-bracket"></i> Acessar Minha Conta</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <h1>Transformação Social pela <span class="highlight">Educação e Tecnologia</span></h1>
+            <p>O Conecta Futuro é um programa focado na capacitação profissional e inclusão produtiva, oferecendo formação em tecnologia e áreas de alta demanda no mercado de trabalho.</p>
+        </div>
+    </header>
+
+    <!-- Cursos Disponíveis -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Nossos Cursos Disponíveis</h2>
+            <div class="courses-grid" id="courses-grid">
+                <div style="grid-column: 1/-1; text-align: center;">
+                    <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem; color: var(--primary);"></i>
+                    <p style="margin-top: 10px; color: var(--text-muted);">Carregando cursos disponíveis...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer style="background-color: var(--secondary); color: #fff; padding: 40px 0; text-align: center; font-size: 0.9rem; border-top: 5px solid var(--accent);">
+        <div class="container">
+            <p style="margin-bottom: 10px;">Instituto<strong>ConectaFuturo</strong> &copy; 2026. Todos os direitos reservados.</p>
+            <p style="color: var(--text-muted);">Plataforma de capacitação profissional e acompanhamento de participantes.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/home.js"></script>
+</body>
+</html>

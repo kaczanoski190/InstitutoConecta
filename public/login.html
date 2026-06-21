@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instituto Conecta Futuro | Acesso ao Sistema</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="login-body">
+
+    <div class="login-card">
+        <div class="login-logo">
+            <a href="/" style="font-size: 2.2rem; color: var(--primary); font-weight: 800; font-family: var(--font-heading);">
+                <i class="fa-solid fa-graduation-cap" style="color: var(--accent);"></i>
+                <span>Conecta<strong>Futuro</strong></span>
+            </a>
+            <p style="color: var(--text-muted); margin-top: 5px;">Acesso administrativo do sistema</p>
+        </div>
+
+        <div id="login-alert" class="alert alert-danger"></div>
+
+        <form id="login-form">
+            <div class="form-group">
+                <label for="email"><i class="fa-solid fa-envelope"></i> E-mail Corporativo</label>
+                <input type="email" id="email" class="form-control" placeholder="exemplo@conectafuturo.org" required autocomplete="username">
+            </div>
+
+            <div class="form-group">
+                <label for="password"><i class="fa-solid fa-lock"></i> Senha</label>
+                <input type="password" id="password" class="form-control" placeholder="••••••••" required autocomplete="current-password">
+            </div>
+
+            <button type="submit" class="btn btn-accent btn-block">
+                <i class="fa-solid fa-right-to-bracket"></i> Entrar no Sistema
+            </button>
+        </form>
+
+        <div class="login-footer">
+            <a href="/"><i class="fa-solid fa-arrow-left"></i> Voltar para a Página Inicial</a>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>

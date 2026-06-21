@@ -219,6 +219,29 @@ ul {
     width: 100%;
 }
 
+.nav-btn-link {
+    background-color: var(--accent);
+    color: #000 !important;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 2px solid var(--accent);
+    transition: var(--transition);
+}
+
+.nav-btn-link:hover {
+    background-color: transparent;
+    color: var(--primary) !important;
+    border-color: var(--accent);
+}
+
+.nav-btn-link::after {
+    display: none !important;
+}
+
 .menu-toggle {
     display: none;
     font-size: 1.5rem;
@@ -773,6 +796,17 @@ ul {
 
     .menu-toggle {
         display: block;
+    }
+
+    .nav-btn-item {
+        margin-top: 15px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-btn-link {
+        justify-content: center;
+        width: 100%;
     }
 
     .hero h1 { font-size: 2.5rem; }
